@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>env-vanguard playground</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ── Header ─────────────────────────────────────────────────────────── -->
+  <header>
+    <div class="header-inner">
+      <div class="header-title">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <div>
+          <h1>env-vanguard <span class="playground-label">playground</span></h1>
+          <p class="subtitle">Zero-dependency environment variable validator</p>
+        </div>
+      </div>
+      <div class="header-links">
+        <span class="version-badge" id="pkg-version">v…</span>
+        <a href="https://www.npmjs.com/package/@aryankesarkar/env-vanguard" target="_blank" rel="noopener" class="badge-link npm-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 0h24v24H0V0zm19.2 19.2V4.8H4.8v14.4h7.2v-9.6h2.4v9.6h4.8z"/></svg>
+          npm
+        </a>
+        <a href="https://github.com/kesarkararyan06-gif/env-vanguard" target="_blank" rel="noopener" class="badge-link gh-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          package source
+        </a>
+        <a href="https://github.com/kesarkararyan06-gif/env-vanguard-demo" target="_blank" rel="noopener" class="badge-link gh-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          demo source
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Presets ─────────────────────────────────────────────────────────── -->
+  <div class="presets-bar">
+    <span class="presets-label">Load preset:</span>
+    <button class="preset-btn" data-preset="valid">✅ Valid env</button>
+    <button class="preset-btn" data-preset="missing">❌ Missing required</button>
+    <button class="preset-btn" data-preset="wrong-types">⚠️ Wrong types</button>
+    <button class="preset-btn" data-preset="bad-enum">🚫 Invalid enum</button>
+    <button class="preset-btn" data-preset="strict">🔒 Strict mode</button>
+  </div>
+
+  <!-- ── Main layout ─────────────────────────────────────────────────────── -->
+  <main>
+    <div class="editors-row">
+      <!-- Schema editor -->
+      <section class="editor-card">
+        <div class="card-header">
+          <h2>Schema <span class="chip">JSON</span></h2>
+          <p class="card-hint">Define what env vars are expected, their types, defaults, and allowed values.</p>
+        </div>
+        <textarea id="schema-editor" spellcheck="false" autocomplete="off"></textarea>
+      </section>
+
+      <!-- Env editor -->
+      <section class="editor-card">
+        <div class="card-header">
+          <h2>Environment <span class="chip">KEY=VALUE or JSON</span></h2>
+          <p class="card-hint">Enter the environment to test. These values are <strong>never logged or stored</strong>.</p>
+        </div>
+        <textarea id="env-editor" spellcheck="false" autocomplete="off"></textarea>
+      </section>
+    </div>
+
+    <!-- Options + Action bar -->
+    <div class="action-bar">
+      <label class="strict-label">
+        <input type="checkbox" id="strict-mode" />
+        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+        Strict mode <span class="chip">rejects undeclared vars</span>
+      </label>
+      <div class="action-btns">
+        <button class="btn btn-primary" id="validate-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Validate
+        </button>
+        <button class="btn btn-secondary" id="example-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Generate .env.example
+        </button>
+      </div>
+    </div>
+
+    <!-- Results panel -->
+    <section class="result-panel" id="result-panel" aria-live="polite">
+      <div class="result-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <p>Results will appear here after you click <strong>Validate</strong> or <strong>Generate .env.example</strong>.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────────────────────── -->
+  <footer>
+    <p>
+      Built to demonstrate <a href="https://www.npmjs.com/package/@aryankesarkar/env-vanguard" target="_blank" rel="noopener">@aryankesarkar/env-vanguard</a>
+      by <a href="https://github.com/kesarkararyan06-gif" target="_blank" rel="noopener">Aryan Kesarkar</a>.
+      No submitted values are logged or stored.
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
