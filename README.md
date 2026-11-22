@@ -2,7 +2,7 @@
 
 > **Live playground** for [`@aryankesarkar/env-vanguard`](https://www.npmjs.com/package/@aryankesarkar/env-vanguard) — a zero-dependency environment variable validator.
 
-🚀 **Live URL:** _To be updated after deployment_
+🚀 **Live URL:** https://env-vanguard-demo.vercel.app
 
 ---
 
